@@ -1,0 +1,47 @@
+"use client";
+
+import { HiOutlineArrowDown, HiOutlineArrowUp } from "react-icons/hi";
+import IconCircle from "./IconCircle";
+import formatString from "../_helpers/formatString";
+import formatDate from "../_helpers/formatDate";
+import { useDeleteTransaction } from "../hooks/useDeleteTransaction";
+
+function Log({ transaction }) {
+  const { amount, description, created_at, user, id } = transaction;
+  const { isDeleting, deleteTransaction } = useDeleteTransaction();
+
+  const isRecent =
+    (Date.now() - new Date(created_at).getTime()) / 1000 / 60 < 5;
+
+  return (
+    <div className="flex items-center justify-between mb-4 hover:bg-sky-100 hover:rounded-full px-1">
+      <div className="flex items-center gap-4">
+        <IconCircle
+          Icon={amount > 0 ? HiOutlineArrowDown : HiOutlineArrowUp}
+          amount={amount}
+        />
+        <span>
+          {formatString(user)} {amount > 0 ? "received" : "paid"}{" "}
+          <span className="font-bold">{Math.abs(amount)} </span>€
+        </span>
+      </div>
+      <div className="text-sm text-gray-500 gap-2 flex">
+        <span>{formatDate(created_at)}</span>
+
+        {isRecent ? (
+          <button
+            disabled={isDeleting}
+            onClick={() => deleteTransaction(id)}
+            className="bg-red-300 rounded-full h-5 w-5 text-center font-bold cursor-pointer text-red-50 hover:bg-red-400 "
+          >
+            &mdash;
+          </button>
+        ) : (
+          ""
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default Log;
