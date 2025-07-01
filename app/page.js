@@ -25,7 +25,7 @@ export default function Page() {
               <div className="flex items-center gap-5 justify-start">
                 <h1 className="font-normal text-3xl ">Home</h1>
                 <h2 className="bg-gray-200 rounded-full p-2 text-xl">
-                  {data.user.name.split(" ").at(0)}
+                  {data?.user?.name?.split(" ").at(0) || ""}
                 </h2>
               </div>
               <InfoBox />

@@ -15,7 +15,6 @@ function TransactionModule() {
   const { createTransaction, isCreating } = useCreateTransaction();
 
   function onSubmit({ amount, description, user, test }) {
-    console.log(test);
     const newTransaction = {
       amount: Number(-amount / 2).toFixed(2),
       description,
