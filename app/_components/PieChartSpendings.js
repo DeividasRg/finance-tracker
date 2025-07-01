@@ -12,11 +12,29 @@ import HeaderStats from "./HeaderStats";
 import { useDescriptionSum } from "../hooks/useDescriptionSum";
 import formatString from "../_helpers/formatString";
 import Spinner from "./Spinner";
+import { useEffect, useState } from "react";
 
 const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042"];
 
 export default function PieChartSpendings() {
   const { descriptionSum, isLoading } = useDescriptionSum();
+  const [radius, setRadius] = useState({ inner: 70, outer: 100 });
+
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth < 640) {
+        // Mobile screen
+        setRadius({ inner: 40, outer: 80 });
+      } else {
+        // Desktop screen
+        setRadius({ inner: 70, outer: 100 });
+      }
+    }
+
+    handleResize(); // set initial size
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   if (isLoading) return <Spinner />;
 
@@ -41,8 +59,8 @@ export default function PieChartSpendings() {
               nameKey="name"
               cx="40%"
               cy="50%"
-              outerRadius={100}
-              innerRadius={70}
+              outerRadius={radius.outer}
+              innerRadius={radius.inner}
               paddingAngle={3}
               fill="#8884d8"
               labelLine={false}

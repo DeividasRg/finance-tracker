@@ -11,7 +11,6 @@ import TransactionModule from "./_components/TransactionModule";
 import QueryProvider from "./_services/QueryProvider";
 import UserTotal from "./_components/UserTotal";
 import { useSession } from "next-auth/react";
-import { getUsers } from "./_services/apiAuth";
 
 export default function Page() {
   const { data } = useSession();
@@ -19,20 +18,20 @@ export default function Page() {
   return (
     <>
       <QueryProvider>
-        <div className="grid grid-cols-[20vw_1fr] gap-10">
+        <div className="sm:grid sm:grid-cols-[20vw_1fr] gap-10 flex flex-col">
           <TransactionModule />
           <div>
-            <div className="flex items-center w-full justify-between pb-12 ">
+            <div className="flex items-center w-full sm:justify-between pb-12">
               <div className="flex items-center gap-5 justify-start">
-                <h1 className="font-normal text-3xl ">Home</h1>
-                <h2 className="bg-gray-200 rounded-full p-2 text-xl">
+                <h1 className="hidden sm:block font-normal text-3xl ">Home</h1>
+                <h2 className="hidden sm:block bg-gray-200 rounded-full p-2 text-xl">
                   {data?.user?.name?.split(" ").at(0) || ""}
                 </h2>
               </div>
               <InfoBox />
             </div>
             <div className="grid grid-rows-[auto_1fr] gap-10">
-              <div className="flex items-center justify-start gap-5">
+              <div className="flex items-center justify-start gap-5 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 <StatBox>
                   <HeaderStats>Total</HeaderStats>
                   <TotalTransactions />
@@ -46,7 +45,7 @@ export default function Page() {
                   <UserTotal user="deividas" />
                 </StatBox>
               </div>
-              <div className="grid grid-cols-[30vw_1fr] gap-4">
+              <div className="sm:grid sm:grid-cols-[30vw_1fr] flex flex-col-reverse gap-4">
                 <StatsBox>
                   <PieChartSpendings />
                 </StatsBox>

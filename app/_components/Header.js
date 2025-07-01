@@ -20,7 +20,7 @@ function Header() {
   return (
     <header className="px-8 py-4 border-b-1 border-b-gray-200 bg-white">
       <div className="flex justify-between items-center max-w-7xl mx-auto">
-        <div className="flex items-center justify-start gap-10">
+        <div className="flex items-center justify-start sm:gap-10 gap-4">
           <Logo />
           <Navigation />
         </div>

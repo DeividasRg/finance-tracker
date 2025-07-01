@@ -15,7 +15,7 @@ function Logs() {
   return (
     <>
       <HeaderStats>Transactions</HeaderStats>
-      <div className="w-full h-[200px] border-gray-300 border-2 rounded-2xl bg-[#f9fafb] mt-4 p-5 overflow-auto">
+      <div className="w-full h-[200px] border-gray-300 border-2 rounded-2xl bg-[#f9fafb] mt-4 p-5 overflow-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {transactions.length > 0 ? (
           transactions.map((transaction) => (
             <Log key={transaction.id} transaction={transaction} />

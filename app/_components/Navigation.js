@@ -8,7 +8,7 @@ function Navigation() {
 
   return (
     <nav className="z-10 text-xl flex items-center justify-between gap-15">
-      <ul className="flex gap-10 items-center">
+      <ul className="flex sm:gap-10 items-center gap-6">
         <li>
           <Link
             href="/"

@@ -26,7 +26,7 @@ function Log({ transaction }) {
         </span>
       </div>
       <div className="text-sm text-gray-500 gap-2 flex">
-        <span>{formatDate(created_at)}</span>
+        <span className="sm:block hidden">{formatDate(created_at)}</span>
 
         {isRecent ? (
           <button
