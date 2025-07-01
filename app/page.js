@@ -11,6 +11,7 @@ import TransactionModule from "./_components/TransactionModule";
 import QueryProvider from "./_services/QueryProvider";
 import UserTotal from "./_components/UserTotal";
 import { useSession } from "next-auth/react";
+import { getUsers } from "./_services/apiAuth";
 
 export default function Page() {
   const { data } = useSession();

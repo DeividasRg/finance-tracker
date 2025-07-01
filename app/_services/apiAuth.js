@@ -1,7 +1,7 @@
 import supabase from "./supabase";
 
 export async function getUsers() {
-  const { data, error } = await supabase.from("transactions").select("*");
+  const { data, error } = await supabase.from("allowedUsers").select("*");
 
   if (error) throw new Error("Could not receive transactions");
 
