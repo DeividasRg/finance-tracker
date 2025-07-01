@@ -20,7 +20,7 @@ function Log({ transaction }) {
           Icon={amount > 0 ? HiOutlineArrowDown : HiOutlineArrowUp}
           amount={amount}
         />
-        <span>
+        <span className="text-xs sm:text-base">
           {formatString(user)} {amount > 0 ? "received" : "paid"}{" "}
           <span className="font-bold">{Math.abs(amount)} </span>€
         </span>
@@ -32,7 +32,7 @@ function Log({ transaction }) {
           <button
             disabled={isDeleting}
             onClick={() => deleteTransaction(id)}
-            className="bg-red-300 rounded-full h-5 w-5 text-center font-bold cursor-pointer text-red-50 hover:bg-red-400 "
+            className="bg-red-300 rounded-full sm:h-5 sm:w-5  w-4 h-4 sm:text-1xl text-xs text-center font-bold cursor-pointer text-red-50 hover:bg-red-400"
           >
             &mdash;
           </button>

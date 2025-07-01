@@ -24,10 +24,10 @@ export default function PieChartSpendings() {
     function handleResize() {
       if (window.innerWidth < 640) {
         // Mobile screen
-        setRadius({ inner: 40, outer: 80 });
+        setRadius({ inner: 20, outer: 40 });
       } else {
         // Desktop screen
-        setRadius({ inner: 70, outer: 100 });
+        setRadius({ inner: 50, outer: 80 });
       }
     }
 
@@ -77,7 +77,7 @@ export default function PieChartSpendings() {
             <Legend
               verticalAlign="middle"
               align="right"
-              width="30%"
+              width="50%"
               iconSize={15}
               iconType="circle"
             />

@@ -11,10 +11,16 @@ import { useSession } from "next-auth/react";
 function TransactionModule() {
   const { data } = useSession();
   const queryClient = useQueryClient();
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset } = useForm({
+    defaultValues: {
+      amount: "",
+      description: "",
+      user: data.user.name.split(" ").at(0).toLowerCase(),
+    },
+  });
   const { createTransaction, isCreating } = useCreateTransaction();
 
-  function onSubmit({ amount, description, user, test }) {
+  function onSubmit({ amount, description, user }) {
     const newTransaction = {
       amount: Number(-amount / 2).toFixed(2),
       description,
@@ -43,6 +49,7 @@ function TransactionModule() {
             type="number"
             step="0.01"
             placeholder="10"
+            defaultValue=""
             id="amount"
             required
             {...register("amount", { required: true })}
@@ -68,7 +75,7 @@ function TransactionModule() {
         </div>
         <input
           id="user"
-          value={data.user.name.split(" ").at(0).toLowerCase()}
+          defaultValue={data.user.name.split(" ").at(0).toLowerCase()}
           hidden
           {...register("user", { required: true })}
         />
