@@ -1,17 +1,17 @@
 "use client";
 
 import { HiOutlineCollection } from "react-icons/hi";
-import { useDescriptionSum } from "../hooks/useDescriptionSum";
 import Spinner from "./Spinner";
+import { useTransactions } from "../hooks/useTransactions";
 
 function TotalTransactions() {
-  const { descriptionSum, isLoading } = useDescriptionSum();
+  const { transactions, isLoading } = useTransactions();
 
   if (isLoading) return <Spinner />;
 
-  const data = descriptionSum
-    .filter((desc) => desc.description !== "Repayment")
-    .reduce((acc, transaction) => acc + transaction.count, 0);
+  const data = transactions.filter(
+    (desc) => desc.description !== "Repayment"
+  ).length;
 
   return (
     <div className="flex items-center gap-8">
