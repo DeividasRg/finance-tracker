@@ -38,8 +38,6 @@ export default function PieChartSpendings() {
 
   if (isLoading) return <Spinner />;
 
-  console.log(transactions);
-
   const data = Object.values(
     transactions
       .filter((desc) => desc.description != "Repayment")

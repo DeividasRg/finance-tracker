@@ -24,14 +24,14 @@ function Navigation() {
 
         <li>
           <Link
-            href="/about"
+            href="/stats"
             className={`hover:text-sky-500  transition-colors ${
               pathName === "/about"
                 ? "border-b-2 border-b-sky-500 pb-1 font-normal"
                 : "font-light"
             }`}
           >
-            About
+            Stats
           </Link>
         </li>
       </ul>

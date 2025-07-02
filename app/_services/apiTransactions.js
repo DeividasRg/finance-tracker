@@ -1,14 +1,18 @@
 import supabase from "./supabase";
 
 export async function getTransactions(filter) {
-  const cutoffDate = new Date();
-  cutoffDate.setDate(cutoffDate.getDate() - Number(filter));
-
-  const { data, error } = await supabase
+  let query = supabase
     .from("transactions")
     .select("*")
-    .gte("created_at", cutoffDate.toISOString())
     .order("created_at", { ascending: false });
+
+  if (filter) {
+    const cutoffDate = new Date();
+    cutoffDate.setDate(cutoffDate.getDate() - Number(filter));
+    query.gte("created_at", cutoffDate.toISOString());
+  }
+
+  const { data, error } = await query;
 
   if (error) throw new Error("Could not receive transactions");
 

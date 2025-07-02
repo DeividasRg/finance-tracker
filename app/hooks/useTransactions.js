@@ -4,7 +4,6 @@ import { useQuery } from "@tanstack/react-query";
 import { getTransactions } from "../_services/apiTransactions";
 import { useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
 
 export function useTransactions() {
   const { status } = useSession();
