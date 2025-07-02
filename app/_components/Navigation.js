@@ -26,7 +26,7 @@ function Navigation() {
           <Link
             href="/stats"
             className={`hover:text-sky-500  transition-colors ${
-              pathName === "/about"
+              pathName === "/stats"
                 ? "border-b-2 border-b-sky-500 pb-1 font-normal"
                 : "font-light"
             }`}
