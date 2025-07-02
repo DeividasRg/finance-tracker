@@ -12,6 +12,7 @@ import QueryProvider from "./_services/QueryProvider";
 import UserTotal from "./_components/UserTotal";
 import { useSession } from "next-auth/react";
 import Filter from "./_components/Filter";
+import { useSearchParams } from "next/navigation";
 
 export default function Page() {
   const { data } = useSession();

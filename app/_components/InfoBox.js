@@ -11,7 +11,6 @@ function InfoBox() {
   const queryClient = useQueryClient();
 
   if (isLoading) return <Spinner />;
-
   const deividasTotals = transactions
     .filter((transaction) => transaction.user === "deividas")
     .reduce((acc, transaction) => acc + transaction.amount, 0);

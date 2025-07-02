@@ -9,15 +9,15 @@ import {
   Tooltip,
 } from "recharts";
 import HeaderStats from "./HeaderStats";
-import { useDescriptionSum } from "../hooks/useDescriptionSum";
 import formatString from "../_helpers/formatString";
 import Spinner from "./Spinner";
 import { useEffect, useState } from "react";
+import { useTransactions } from "../hooks/useTransactions";
 
 const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042"];
 
 export default function PieChartSpendings() {
-  const { descriptionSum, isLoading } = useDescriptionSum();
+  const { transactions, isLoading } = useTransactions();
   const [radius, setRadius] = useState({ inner: 70, outer: 100 });
 
   useEffect(() => {
@@ -38,14 +38,24 @@ export default function PieChartSpendings() {
 
   if (isLoading) return <Spinner />;
 
-  const data = descriptionSum
-    .filter((desc) => desc.description != "Repayment")
-    .map((sum) => {
-      return {
-        name: formatString(sum.description),
-        value: Math.abs(sum.sum) * 2,
-      };
-    });
+  console.log(transactions);
+
+  const data = Object.values(
+    transactions
+      .filter((desc) => desc.description != "Repayment")
+      .reduce((acc, trans) => {
+        if (!acc[trans.description]) {
+          acc[trans.description] = { description: trans.description, sum: 0 };
+        }
+        acc[trans.description].sum += Math.abs(trans.amount);
+        return acc;
+      }, {})
+  ).map((sum) => {
+    return {
+      name: formatString(sum.description),
+      value: Math.abs(sum.sum) * 2,
+    };
+  });
 
   return (
     <div className="w-full h-64">
