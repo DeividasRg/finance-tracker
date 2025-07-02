@@ -6,16 +6,8 @@ import { auth } from "@/Auth";
 import { SessionProvider } from "next-auth/react";
 import { Toaster } from "react-hot-toast";
 import Main from "./_components/Main";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import QueryProvider from "./_services/QueryProvider";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -37,7 +29,10 @@ export default async function RootLayout({ children }) {
       <body className={`${poppins.className} antialiased`}>
         <SessionProvider session={session}>
           <Header />
-          <Main>{children}</Main>
+          <QueryProvider>
+            <Main>{children}</Main>
+            <ReactQueryDevtools initialIsOpen={false} />
+          </QueryProvider>
           <Toaster position="top-center" />
         </SessionProvider>
       </body>

@@ -5,7 +5,7 @@ import Navigation from "./Navigation";
 import { signOut } from "next-auth/react";
 
 function Header() {
-  const { data, status } = useSession();
+  const { status } = useSession();
 
   if (status !== "authenticated") {
     return (
