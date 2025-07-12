@@ -19,7 +19,7 @@ function UserTotal({ user }) {
         <HiOutlineCash className="w-[2.5rem] h-[2.5rem]" />
       </div>
       <p className="text-3xl font-bold">
-        {Math.abs(data)} <span>€</span>
+        {Math.abs(data).toFixed(2)} <span>€</span>
       </p>
     </div>
   );
