@@ -21,7 +21,7 @@ function TransactionModule() {
   });
   const { createTransaction, isCreating } = useCreateTransaction();
 
-  function onSubmit({ amount, description, user, proportion }) {
+  function onSubmit({ amount, description, user, proportion, comment }) {
     const newTransaction = {
       amount:
         proportion === "half"
@@ -29,6 +29,7 @@ function TransactionModule() {
           : Number(-amount).toFixed(2),
       description,
       user,
+      comment: comment.slice(0, 100),
     };
 
     createTransaction(newTransaction, {
@@ -89,9 +90,22 @@ function TransactionModule() {
               -
             </option>
             <option value="groceries">Groceries</option>
+            <option value="food">Food</option>
             <option value="fuel">Fuel</option>
             <option value="other">Other</option>
           </select>
+        </div>
+        <div>
+          <p className="font-light">Comment</p>
+          <input
+            className="bg-gray-50 border rounded-lg border-gray-300 py-3 w-full mt-1 p-2 outline-0"
+            type="text"
+            placeholder="Cat food"
+            defaultValue=""
+            id="comment"
+            required
+            {...register("comment")}
+          />
         </div>
         <input
           id="user"
