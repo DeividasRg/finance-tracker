@@ -2,12 +2,12 @@
 
 import { useQueryClient } from "@tanstack/react-query";
 import { useCreateTransaction } from "../hooks/useCreateTransaction";
-import { useTransactions } from "../hooks/useTransactions";
 import Spinner from "./Spinner";
+import { useAllTransactions } from "../hooks/useAllTransactions";
 
 function InfoBox() {
   const { isCreating, createTransaction } = useCreateTransaction();
-  const { transactions, isLoading } = useTransactions();
+  const { transactions, isLoading } = useAllTransactions();
   const queryClient = useQueryClient();
 
   if (isLoading) return <Spinner />;
