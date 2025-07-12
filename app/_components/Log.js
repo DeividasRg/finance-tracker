@@ -7,7 +7,7 @@ import formatDate from "../_helpers/formatDate";
 import { useDeleteTransaction } from "../hooks/useDeleteTransaction";
 
 function Log({ transaction }) {
-  const { amount, description, created_at, user, id } = transaction;
+  const { amount, comment, created_at, user, id } = transaction;
   const { isDeleting, deleteTransaction } = useDeleteTransaction();
 
   const isRecent =
@@ -37,7 +37,7 @@ function Log({ transaction }) {
             &mdash;
           </button>
         ) : (
-          ""
+          <p>{comment}</p>
         )}
       </div>
     </div>

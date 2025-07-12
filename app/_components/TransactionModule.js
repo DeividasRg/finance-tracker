@@ -16,15 +16,20 @@ function TransactionModule() {
       amount: "",
       description: "",
       user: data.user.name.split(" ").at(0).toLowerCase(),
+      proportion: "half",
     },
   });
   const { createTransaction, isCreating } = useCreateTransaction();
 
-  function onSubmit({ amount, description, user }) {
+  function onSubmit({ amount, description, user, proportion, comment }) {
     const newTransaction = {
-      amount: Number(-amount / 2).toFixed(2),
+      amount:
+        proportion === "half"
+          ? Number(-amount / 2).toFixed(2)
+          : Number(-amount).toFixed(2),
       description,
       user,
+      comment: comment.slice(0, 100),
     };
 
     createTransaction(newTransaction, {
@@ -57,6 +62,22 @@ function TransactionModule() {
         </div>
 
         <div>
+          <p className="font-light">Did you pay full or half?</p>
+          <select
+            defaultValue="half"
+            id="proportion"
+            className="bg-gray-50 border rounded-lg border-gray-300 py-3 px-2 w-full mt-1  outline-0"
+            required
+            {...register("proportion", { required: true })}
+          >
+            <option value="" disabled hidden>
+              -
+            </option>
+            <option value="half">Half</option>
+            <option value="full">Full</option>
+          </select>
+        </div>
+        <div>
           <p className="font-light">What did you buy?</p>
           <select
             defaultValue=""
@@ -69,9 +90,22 @@ function TransactionModule() {
               -
             </option>
             <option value="groceries">Groceries</option>
+            <option value="food">Food</option>
             <option value="fuel">Fuel</option>
             <option value="other">Other</option>
           </select>
+        </div>
+        <div>
+          <p className="font-light">Comment</p>
+          <input
+            className="bg-gray-50 border rounded-lg border-gray-300 py-3 w-full mt-1 p-2 outline-0"
+            type="text"
+            placeholder="Cat food"
+            defaultValue=""
+            id="comment"
+            required
+            {...register("comment")}
+          />
         </div>
         <input
           id="user"
