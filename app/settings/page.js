@@ -1,10 +1,10 @@
 "use client";
 import { useForm } from "react-hook-form";
-import BuyCategory from "../_components/buyCategory";
 import Spinner from "../_components/Spinner";
 import { useBuyCategories } from "../hooks/useBuyCategories";
 import { useQueryClient } from "@tanstack/react-query";
 import { useCreateBuyCategory } from "../hooks/useCreateBuyCategory";
+import BuyCategory from "../_components/buyCategory";
 
 export default function Page() {
   const { isLoading, buyCategories } = useBuyCategories();
