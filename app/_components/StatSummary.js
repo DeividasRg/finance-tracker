@@ -1,15 +1,18 @@
 import formatString from "../_helpers/formatString";
 
 function StatSummary({ data, user }) {
-  const totalSpent = Math.abs(
-    data
-      .filter((x) => x.amount < 0)
-      .reduce((acc, cur) => acc + cur.amount, 0) || 0
+  const totalSpent = Math.round(
+    Math.abs(
+      data
+        .filter((x) => x.amount < 0)
+        .reduce((acc, cur) => acc + cur.amount, 0) || 0
+    )
   );
-  const totalReceived =
+  const totalReceived = Math.round(
     data
       .filter((x) => x.amount > 0)
-      .reduce((acc, cur) => acc + cur.amount, 0) || 0;
+      .reduce((acc, cur) => acc + cur.amount, 0) || 0
+  );
 
   const totalCount = data.length;
 
