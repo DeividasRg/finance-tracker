@@ -14,7 +14,7 @@ import { useSession } from "next-auth/react";
 import Filter from "./_components/Filter";
 
 export default function Page() {
-  const { data } = useSession();
+  const { data } = useSession(); //session
 
   return (
     <>
