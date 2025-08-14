@@ -7,10 +7,13 @@ import HeaderStats from "./HeaderStats";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
+import { useBuyCategories } from "../hooks/useBuyCategories";
+import Spinner from "./Spinner";
 
 function TransactionModule() {
   const { data } = useSession();
   const queryClient = useQueryClient();
+  const { buyCategories, isLoading } = useBuyCategories();
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
       amount: "",
@@ -20,6 +23,8 @@ function TransactionModule() {
     },
   });
   const { createTransaction, isCreating } = useCreateTransaction();
+
+  if (isLoading) return <Spinner />;
 
   function onSubmit({ amount, description, user, proportion, comment }) {
     const newTransaction = {
@@ -89,10 +94,11 @@ function TransactionModule() {
             <option value="" disabled hidden>
               -
             </option>
-            <option value="groceries">Groceries</option>
-            <option value="food">Food</option>
-            <option value="fuel">Fuel</option>
-            <option value="other">Other</option>
+            {buyCategories.map((category) => (
+              <option key={category.id} value={category.value}>
+                {category.label}
+              </option>
+            ))}
           </select>
         </div>
         <div>
