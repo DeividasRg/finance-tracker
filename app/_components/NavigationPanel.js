@@ -26,7 +26,7 @@ function NavigationPanel() {
           </div>
           <ul className="flex flex-col items-left gap-6 mt-10">
             {navigationConfig.map((link) => (
-              <li key={link.label}>
+              <li className="text-xl" key={link.label}>
                 <MenuLink
                   href={link.href}
                   pathName={pathName}
@@ -38,7 +38,7 @@ function NavigationPanel() {
           </ul>
           <button
             onClick={signOut}
-            className="absolute bottom-6 left-5 right-5 py-3 bg-gray-300 rounded-full"
+            className="mt-5 w-full py-3 bg-gray-300 rounded-full"
           >
             Logout
           </button>
