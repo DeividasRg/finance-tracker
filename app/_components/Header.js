@@ -25,7 +25,7 @@ function Header() {
       <Navigation />
       <button
         onClick={signOut}
-        className="bg-gray-200 p-3 rounded-full cursor-pointer active:bg-gray-400 hover:bg-gray-300"
+        className="bg-gray-200 p-3 rounded-full cursor-pointer active:bg-gray-400 hover:bg-gray-300 hidden sm:block"
       >
         Logout
       </button>
