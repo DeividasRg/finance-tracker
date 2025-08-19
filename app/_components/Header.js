@@ -1,11 +1,13 @@
 "use client";
 import { useSession } from "next-auth/react";
 import Logo from "./Logo";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { useBurgerMenu } from "../_context/BurgerMenuProvider";
 import Navigation from "./Navigation";
-import { signOut } from "next-auth/react";
 
 function Header() {
   const { status } = useSession();
+  const { isOpen, openBurgerMenu, closeBurgerMenu } = useBurgerMenu();
 
   if (status !== "authenticated") {
     return (
@@ -18,19 +20,18 @@ function Header() {
   }
 
   return (
-    <header className="px-8 py-4 border-b-1 border-b-gray-200 bg-white">
-      <div className="flex justify-between items-center max-w-7xl mx-auto">
-        <div className="flex items-center justify-start sm:gap-10 gap-4 ">
-          <Logo />
-          <Navigation />
-        </div>
+    <header className="flex items-center justify-between px-15 py-5 border-b-1 border-b-gray-200 bg-white">
+      <Logo />
+      <Navigation />
+
+      {!isOpen && (
         <button
-          onClick={() => signOut()}
-          className="bg-gray-100 rounded-full p-2 hover:bg-gray-200 hover:cursor-pointer font-normal"
+          onClick={openBurgerMenu}
+          className="mt-2 border border-gray-400 p-2 rounded-full sm:hidden"
         >
-          Sign Out
+          <RxHamburgerMenu />
         </button>
-      </div>
+      )}
     </header>
   );
 }
