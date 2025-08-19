@@ -35,7 +35,7 @@ export default function Page() {
     <>
       <AllStats transactions={transactions} />
       <div className="sm:flex sm:justify-between mt-15 sm:mt-0">
-        <div className="flex flex-col justify-center items-center gap-15 w-full sm:px-20 xl:px-120">
+        <div className="flex flex-col justify-center items-center gap-15 w-full sm:px-20">
           <StatSummary data={deividas} user="deividas" />
           <StatSummary data={brigita} user="brigita" />
         </div>
