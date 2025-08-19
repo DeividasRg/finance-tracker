@@ -17,7 +17,7 @@ function NavigationPanel() {
           onClick={closeBurgerMenu}
           className="fixed inset-0 bg-black/40 z-40"
         />
-        <div className="fixed top-0 right-0 z-50 bg-white h-screen w-[60%] overflow-auto px-5 py-6">
+        <div className="fixed top-0 right-0 z-50 bg-white h-screen w-[60%] px-5 py-6">
           <div className="flex items-center justify-between">
             <h1 className="font-bold">Menu</h1>
             <button onClick={closeBurgerMenu} className="text-3xl">
