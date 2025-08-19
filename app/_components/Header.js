@@ -33,7 +33,7 @@ function Header() {
       {!isOpen && (
         <button
           onClick={openBurgerMenu}
-          className="mt-2 border border-gray-400 p-2 rounded-full sm:hidden"
+          className="mt-2 border border-gray-400 p-2 rounded-full sm:hidden cursor-pointer"
         >
           <RxHamburgerMenu />
         </button>
