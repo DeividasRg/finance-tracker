@@ -26,7 +26,7 @@ function Logs() {
 
   return (
     <>
-      <div className="flex flex-col gap-1 sm:flex-row sm:gap-5">
+      <div className="flex flex-col gap-1 sm:flex-row sm:gap-5 items-center sm:justify-between">
         <HeaderStats>Transactions</HeaderStats>
         <div className="mb-2 flex items-center gap-2 sm:gap-4">
           {[...uniqueCategories].map((cat) => (
@@ -34,8 +34,18 @@ function Logs() {
               onClick={() =>
                 cat === description ? setDescription("") : setDescription(cat)
               }
-              className={`text-sm bg-blue-100 p-2 rounded-full cursor-pointer  ${
-                description === cat ? "bg-blue-300" : "hover:bg-blue-200"
+              className={`p-2  rounded-full cursor-pointer text-gray-700 ${
+                cat === "Repayment"
+                  ? `${
+                      cat === description
+                        ? "bg-green-400"
+                        : "bg-green-200 hover:bg-green-300"
+                    } `
+                  : `${
+                      cat === description
+                        ? "bg-sky-400"
+                        : "bg-sky-200 hover:bg-sky-300"
+                    } `
               }`}
               key={cat}
             >
