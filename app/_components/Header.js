@@ -1,5 +1,5 @@
 "use client";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Logo from "./Logo";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useBurgerMenu } from "../_context/BurgerMenuProvider";
@@ -23,6 +23,12 @@ function Header() {
     <header className="flex items-center justify-between px-15 py-5 border-b-1 border-b-gray-200 bg-white">
       <Logo />
       <Navigation />
+      <button
+        onClick={signOut}
+        className="bg-gray-200 p-3 rounded-full cursor-pointer active:bg-gray-400 hover:bg-gray-300 hidden sm:block"
+      >
+        Logout
+      </button>
 
       {!isOpen && (
         <button
