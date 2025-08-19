@@ -1,4 +1,5 @@
 import formatString from "../_helpers/formatString";
+import Stat from "./Stat";
 
 function StatSummary({ data, user }) {
   const totalSpent = Math.round(
@@ -18,22 +19,14 @@ function StatSummary({ data, user }) {
 
   return (
     <>
-      <h1 className="text-center font-normal tracking-widest border-b">
+      <h1 className="text-2xl font-bold text-center">
         {formatString(user)} all time stats
       </h1>
+
       <div className="flex flex-col w-[95%] gap-3">
-        <div className="flex items-center justify-between border-b">
-          <p className="font-normal text-gray-700">Total spent:</p>
-          <p className="font-light">{totalSpent} €</p>
-        </div>
-        <div className="flex items-center justify-between border-b">
-          <p className="font-normal text-gray-700">Total received:</p>
-          <p className="font-light">{totalReceived} €</p>
-        </div>
-        <div className="flex items-center justify-between border-b">
-          <p className="font-normal text-gray-700">Total transactions:</p>
-          <p className="font-light">{totalCount}</p>
-        </div>
+        <Stat label="Total spent:" data={totalSpent} />
+        <Stat label="Total received:" data={totalReceived} />
+        <Stat label="Total transactions:" data={totalCount} />
       </div>
     </>
   );
