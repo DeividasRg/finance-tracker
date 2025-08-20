@@ -28,7 +28,7 @@ function Logs() {
     <>
       <div className="flex flex-col gap-1 sm:flex-row sm:gap-5 items-center sm:justify-between">
         <HeaderStats>Transactions</HeaderStats>
-        <div className="mb-2 flex items-center gap-2 sm:gap-4">
+        <div className="mb-2 flex flex-wrap items-center gap-2 sm:gap-4 justify-center">
           {[...uniqueCategories].map((cat) => (
             <button
               onClick={() =>
