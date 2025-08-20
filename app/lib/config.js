@@ -1,5 +1,6 @@
 export const navigationConfig = [
   { label: "Home", href: "/" },
-  { label: "Settings", href: "/settings" },
+  { label: "Projects", href: "/projects" },
   { label: "Stats", href: "/stats" },
+  { label: "Settings", href: "/settings" },
 ];
