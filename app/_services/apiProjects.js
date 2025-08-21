@@ -41,3 +41,9 @@ export async function createProjectTransaction(newTransaction) {
 
   if (error) throw new Error("failed", error.message);
 }
+
+export async function createProject(project) {
+  const { error } = await supabase.from("projects").insert([{ ...project }]);
+
+  if (error) throw new Error("failed", error.message);
+}
