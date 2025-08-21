@@ -7,15 +7,22 @@ import Spinner from "@/app/_components/Spinner";
 import StatsBox from "@/app/_components/StatsBox";
 import TitleComponent from "@/app/_components/TitleComponent";
 import { getProject } from "@/app/_services/apiProjects";
+import { useCloseProject } from "@/app/hooks/useCloseProject";
 import { useProjectTransactions } from "@/app/hooks/useProjectTransactions";
+import { useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import { use, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export default function ProjectPage({ params }) {
+  const router = useRouter();
   const { id } = use(params);
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
   const { projectTransactions, isLoading: isLoadingTransactions } =
     useProjectTransactions(id);
+  const { closeProject: closeProjectMutation, isClosing } = useCloseProject();
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     async function getData() {
@@ -35,6 +42,26 @@ export default function ProjectPage({ params }) {
   if (loading || isLoadingTransactions) return <Spinner />;
   if (!project) return <p>No project found</p>;
 
+  function closeProject() {
+    closeProjectMutation(id, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ active: true });
+        router.push("/projects");
+        toast.success("Project closed", {
+          duration: 3000,
+          style: {
+            fontSize: "1.25rem",
+            padding: "16px 24px",
+            borderRadius: "12px",
+          },
+        });
+      },
+      onError: () => {
+        console.error("Failed to close project");
+      },
+    });
+  }
+
   return (
     <div>
       <TitleComponent text={project.name.toUpperCase()} />
@@ -48,6 +75,12 @@ export default function ProjectPage({ params }) {
           <ProjectLogs projectTransactions={projectTransactions} />
         </StatsBox>
       </div>
+      <button
+        className="text-center w-full mt-5 bg-red-200 py-2 rounded-full cursor-pointer hover:bg-red-300 active:bg-red-400"
+        onClick={closeProject}
+      >
+        Close Project
+      </button>
     </div>
   );
 }
