@@ -4,7 +4,7 @@ import TitleComponent from "../_components/TitleComponent";
 
 function page() {
   return (
-    <div className="flex items-center flex-col">
+    <div className="flex flex-col sm:items-center">
       <TitleComponent text="PROJECTS" />
       <NewProjectForm />
       <ProjectList />
