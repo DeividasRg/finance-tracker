@@ -24,3 +24,12 @@ export async function deleteBuyCategory(id) {
 
   if (error) throw new Error("Buy category could not be deleted");
 }
+
+export async function closeProject(id) {
+  const { error } = await supabase
+    .from("projects")
+    .update({ closed: true })
+    .eq("id", id);
+
+  if (error) throw new Error("Could not close project");
+}
