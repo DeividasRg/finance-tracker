@@ -3,9 +3,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { getProjects } from "../_services/apiProjects";
+import { getProjectsView } from "../_services/apiProjects";
 
-export function useAllProjects() {
+export function useAllProjectsView() {
   const { status } = useSession();
   const router = useRouter();
 
@@ -18,8 +18,8 @@ export function useAllProjects() {
     data: projects,
     error,
   } = useQuery({
-    queryKey: ["AllProjects"],
-    queryFn: () => getProjects(),
+    queryKey: ["AllProjectsView"],
+    queryFn: () => getProjectsView(),
   });
 
   return { isLoading, error, projects };

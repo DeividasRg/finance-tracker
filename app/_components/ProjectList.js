@@ -1,10 +1,10 @@
 "use client";
-import { useAllProjects } from "../hooks/useAllProjects";
+import { useAllProjectsView } from "../hooks/useAllProjectsView";
 import ProjectListItem from "./ProjectListItem";
 import Spinner from "./Spinner";
 
 function ProjectList() {
-  const { projects, isLoading } = useAllProjects();
+  const { projects, isLoading } = useAllProjectsView();
 
   if (isLoading) return <Spinner />;
 
