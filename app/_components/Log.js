@@ -6,8 +6,8 @@ import formatString from "../_helpers/formatString";
 import formatDate from "../_helpers/formatDate";
 import { useDeleteTransaction } from "../hooks/useDeleteTransaction";
 
-function Log({ transaction }) {
-  const { amount, comment, created_at, user, id } = transaction;
+function Log({ transaction, isProject = false }) {
+  const { amount, comment, description, created_at, user, id } = transaction;
   const { isDeleting, deleteTransaction } = useDeleteTransaction();
 
   const isRecent =
@@ -15,20 +15,33 @@ function Log({ transaction }) {
 
   return (
     <div className="flex items-center justify-between mb-4 hover:bg-sky-100 hover:rounded-full px-1">
-      <div className="flex items-center gap-4">
-        <IconCircle
-          Icon={amount > 0 ? HiOutlineArrowDown : HiOutlineArrowUp}
-          amount={amount}
-        />
-        <span className="text-xs sm:text-base">
-          {formatString(user)} {amount > 0 ? "received" : "paid"}{" "}
-          <span className="font-bold">{Math.abs(amount)} </span>€
-        </span>
-      </div>
+      {isProject ? (
+        <div className="flex items-center gap-4">
+          <span className="text-xs sm:text-base">
+            {formatString(user)} paid
+            <span className="font-bold"> {Math.abs(amount)} </span>€
+          </span>
+          <span className="text-sm text-gray-500">
+            {" "}
+            {formatString(description)}
+          </span>
+        </div>
+      ) : (
+        <div className="flex items-center gap-4">
+          <IconCircle
+            Icon={amount > 0 ? HiOutlineArrowDown : HiOutlineArrowUp}
+            amount={amount}
+          />
+          <span className="text-xs sm:text-base">
+            {formatString(user)} {amount > 0 ? "received" : "paid"}{" "}
+            <span className="font-bold">{Math.abs(amount)} </span>€
+          </span>
+        </div>
+      )}
       <div className="text-sm text-gray-500 gap-2 flex">
         <span className="sm:block hidden">{formatDate(created_at)}</span>
 
-        {isRecent ? (
+        {isRecent && !isProject ? (
           <button
             disabled={isDeleting}
             onClick={() => deleteTransaction(id)}
