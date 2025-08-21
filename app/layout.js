@@ -37,7 +37,7 @@ export default async function RootLayout({ children }) {
               <Main>{children}</Main>
               <ReactQueryDevtools initialIsOpen={false} />
             </QueryProvider>
-            <Toaster position="top-center" />
+            <Toaster position="bottom-center" />
           </BurgerMenuProvider>
         </SessionProvider>
       </body>

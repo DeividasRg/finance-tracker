@@ -1,11 +1,9 @@
 "use client";
 
 import { useQueryClient } from "@tanstack/react-query";
-import Select from "react-select";
 import { useCreateTransaction } from "../hooks/useCreateTransaction";
 import HeaderStats from "./HeaderStats";
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useBuyCategories } from "../hooks/useBuyCategories";
 import Spinner from "./Spinner";
