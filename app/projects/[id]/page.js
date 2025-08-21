@@ -13,6 +13,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { use, useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { HiOutlineArrowLeft } from "react-icons/hi";
 
 export default function ProjectPage({ params }) {
   const router = useRouter();
@@ -62,25 +63,38 @@ export default function ProjectPage({ params }) {
     });
   }
 
+  function goBack() {
+    router.push("/projects");
+  }
+
   return (
-    <div>
-      <TitleComponent text={project.name.toUpperCase()} />
-      <ProjectTransactionModule id={id} />
-      <HighLowPaymentOverview
-        id={id}
-        projectTransactions={projectTransactions}
-      />
-      <div className="mt-5">
-        <StatsBox>
-          <ProjectLogs projectTransactions={projectTransactions} />
-        </StatsBox>
-      </div>
+    <>
       <button
-        className="text-center w-full mt-5 bg-red-200 py-2 rounded-full cursor-pointer hover:bg-red-300 active:bg-red-400"
-        onClick={closeProject}
+        onClick={() => goBack()}
+        className="flex items-center gap-2 cursor-pointer hover:bg-gray-100 active:bg-gray-200 rounded-full p-2"
       >
-        Close Project
+        <HiOutlineArrowLeft />
+        <p>Go back</p>
       </button>
-    </div>
+      <div className="sm:flex sm:flex-col sm:w-[30%] sm:mx-auto">
+        <TitleComponent text={project.name.toUpperCase()} />
+        <ProjectTransactionModule id={id} />
+        <HighLowPaymentOverview
+          id={id}
+          projectTransactions={projectTransactions}
+        />
+        <div className="mt-5">
+          <StatsBox>
+            <ProjectLogs projectTransactions={projectTransactions} />
+          </StatsBox>
+        </div>
+        <button
+          className="text-center mt-5 bg-red-200 py-2 rounded-full cursor-pointer hover:bg-red-300 active:bg-red-400"
+          onClick={closeProject}
+        >
+          Close Project
+        </button>
+      </div>
+    </>
   );
 }

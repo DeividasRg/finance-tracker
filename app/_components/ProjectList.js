@@ -10,7 +10,7 @@ function ProjectList() {
 
   return (
     <div className="mt-10">
-      <ul className="flex flex-col items-center gap-1">
+      <ul className="flex flex-col gap-1">
         {projects.map((project) => (
           <ProjectListItem key={project.id} project={project} />
         ))}
