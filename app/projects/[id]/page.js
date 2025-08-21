@@ -89,7 +89,7 @@ export default function ProjectPage({ params }) {
           </StatsBox>
         </div>
         <button
-          className="text-center mt-5 bg-red-200 py-2 rounded-full cursor-pointer hover:bg-red-300 active:bg-red-400"
+          className="text-center mt-5 bg-red-200 py-2 rounded-full cursor-pointer hover:bg-red-300 active:bg-red-400 w-full"
           onClick={closeProject}
         >
           Close Project
