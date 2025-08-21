@@ -1,6 +1,6 @@
 import supabase from "./supabase";
 
-export async function getProjects() {
+export async function getProjectsView() {
   const { data, error } = await supabase
     .from("project_with_totals")
     .select("*")
