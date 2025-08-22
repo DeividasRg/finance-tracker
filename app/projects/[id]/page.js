@@ -76,7 +76,7 @@ export default function ProjectPage({ params }) {
         <HiOutlineArrowLeft />
         <p>Go back</p>
       </button>
-      <div className="sm:flex sm:flex-col sm:w-[30%] sm:mx-auto">
+      <div className="sm:flex sm:flex-col sm:w-[40%] sm:mx-auto">
         <TitleComponent text={project.name.toUpperCase()} />
         <ProjectTransactionModule id={id} />
         <HighLowPaymentOverview
