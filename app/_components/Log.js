@@ -5,10 +5,16 @@ import IconCircle from "./IconCircle";
 import formatString from "../_helpers/formatString";
 import formatDate from "../_helpers/formatDate";
 import { useDeleteTransaction } from "../hooks/useDeleteTransaction";
+import { useDeleteProjectTransaction } from "../hooks/useDeleteProjectTransaction";
 
 function Log({ transaction, isProject = false }) {
   const { amount, comment, description, created_at, user, id } = transaction;
-  const { isDeleting, deleteTransaction } = useDeleteTransaction();
+  const { isDeleting: isDeletingTransaction, deleteTransaction } =
+    useDeleteTransaction();
+  const {
+    isDeleting: isDeletetingProjectTransaction,
+    deleteProjectTransaction,
+  } = useDeleteProjectTransaction();
 
   const isRecent =
     (Date.now() - new Date(created_at).getTime()) / 1000 / 60 < 5;
@@ -22,7 +28,6 @@ function Log({ transaction, isProject = false }) {
             <span className="font-bold"> {Math.abs(amount)} </span>€
           </span>
           <span className="text-sm text-gray-500">
-            {" "}
             {formatString(description)}
           </span>
         </div>
@@ -41,10 +46,12 @@ function Log({ transaction, isProject = false }) {
       <div className="text-sm text-gray-500 gap-2 flex">
         <span className="sm:block hidden">{formatDate(created_at)}</span>
 
-        {isRecent && !isProject ? (
+        {isRecent ? (
           <button
-            disabled={isDeleting}
-            onClick={() => deleteTransaction(id)}
+            disabled={isDeletingTransaction || isDeletetingProjectTransaction}
+            onClick={() =>
+              isProject ? deleteProjectTransaction(id) : deleteTransaction(id)
+            }
             className="bg-red-300 rounded-full sm:h-5 sm:w-5  w-4 h-4 sm:text-1xl text-xs text-center font-bold cursor-pointer text-red-50 hover:bg-red-400"
           >
             &mdash;
