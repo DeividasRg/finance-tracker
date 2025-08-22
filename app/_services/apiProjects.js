@@ -27,7 +27,8 @@ export async function getProjectTransactions(id) {
   const { data, error } = await supabase
     .from("projectTransactions")
     .select("*")
-    .eq("projectId", id);
+    .eq("projectId", id)
+    .order("created_at", { ascending: false });
 
   if (error) throw new Error("Could not receive project transactions");
 
@@ -38,6 +39,15 @@ export async function createProjectTransaction(newTransaction) {
   const { error } = await supabase
     .from("projectTransactions")
     .insert([{ ...newTransaction }]);
+
+  if (error) throw new Error("failed", error.message);
+}
+
+export async function deleteProjectTransaction(id) {
+  const { error } = await supabase
+    .from("projectTransactions")
+    .delete()
+    .eq("id", id);
 
   if (error) throw new Error("failed", error.message);
 }
