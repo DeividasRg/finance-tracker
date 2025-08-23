@@ -52,6 +52,12 @@ export async function deleteProjectTransaction(id) {
   if (error) throw new Error("failed", error.message);
 }
 
+export async function deleteProject(id) {
+  const { error } = await supabase.from("projects").delete().eq("id", id);
+
+  if (error) throw new Error("failed", error.message);
+}
+
 export async function createProject(project) {
   const { error } = await supabase.from("projects").insert([{ ...project }]);
 
