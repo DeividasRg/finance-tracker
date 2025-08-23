@@ -1,7 +1,9 @@
 "use client";
 
+import BackButton from "@/app/_components/BackButton";
 import HighLowPaymentOverview from "@/app/_components/HighLowPaymentOverview";
 import ProjectLogs from "@/app/_components/ProjectLogs";
+import ProjectMenuSide from "@/app/_components/ProjectMenuSide";
 import ProjectTransactionModule from "@/app/_components/ProjectTransactionModule";
 import Spinner from "@/app/_components/Spinner";
 import StatsBox from "@/app/_components/StatsBox";
@@ -13,10 +15,8 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { use, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { HiOutlineArrowLeft } from "react-icons/hi";
 
 export default function ProjectPage({ params }) {
-  const router = useRouter();
   const { id } = use(params);
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -24,6 +24,7 @@ export default function ProjectPage({ params }) {
     useProjectTransactions(id);
   const { closeProject: closeProjectMutation, isClosing } = useCloseProject();
   const queryClient = useQueryClient();
+  const router = useRouter();
 
   useEffect(() => {
     async function getData() {
@@ -63,38 +64,31 @@ export default function ProjectPage({ params }) {
     });
   }
 
-  function goBack() {
-    router.push("/projects");
-  }
-
   return (
-    <>
-      <button
-        onClick={() => goBack()}
-        className="flex items-center gap-2 cursor-pointer hover:bg-gray-100 active:bg-gray-200 rounded-full p-2"
-      >
-        <HiOutlineArrowLeft />
-        <p>Go back</p>
-      </button>
-      <div className="sm:flex sm:flex-col sm:w-[40%] sm:mx-auto">
-        <TitleComponent text={project.name.toUpperCase()} />
-        <ProjectTransactionModule id={id} />
-        <HighLowPaymentOverview
-          id={id}
-          projectTransactions={projectTransactions}
-        />
-        <div className="mt-5">
-          <StatsBox>
-            <ProjectLogs projectTransactions={projectTransactions} />
-          </StatsBox>
+    <div className="flex">
+      <ProjectMenuSide projectId={id} />
+      <div className="flex-1">
+        <BackButton href="/projects" />
+        <div className="sm:flex sm:flex-col sm:w-[40%] sm:mx-auto">
+          <TitleComponent text={project.name.toUpperCase()} />
+          <ProjectTransactionModule id={id} />
+          <HighLowPaymentOverview
+            id={id}
+            projectTransactions={projectTransactions}
+          />
+          <div className="mt-5">
+            <StatsBox>
+              <ProjectLogs projectTransactions={projectTransactions} />
+            </StatsBox>
+          </div>
+          <button
+            className="text-center mt-5 bg-red-200 py-2 rounded-full cursor-pointer hover:bg-red-300 active:bg-red-400 w-full"
+            onClick={closeProject}
+          >
+            Close Project
+          </button>
         </div>
-        <button
-          className="text-center mt-5 bg-red-200 py-2 rounded-full cursor-pointer hover:bg-red-300 active:bg-red-400 w-full"
-          onClick={closeProject}
-        >
-          Close Project
-        </button>
       </div>
-    </>
+    </div>
   );
 }
