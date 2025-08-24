@@ -26,7 +26,8 @@ export default function Page() {
       if (!acc[year][month][cur.description])
         acc[year][month][cur.description] = 0;
 
-      acc[year][month][cur.description] += cur.amount;
+      acc[year][month][cur.description] +=
+        cur.proportion === "half" ? cur.amount * 2 : cur.amount;
 
       return acc;
     }, {});
