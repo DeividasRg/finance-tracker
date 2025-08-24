@@ -8,8 +8,12 @@ import { Toaster } from "react-hot-toast";
 import Main from "./_components/Main";
 import QueryProvider from "./_services/QueryProvider";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { BurgerMenuProvider } from "./_context/BurgerMenuProvider";
+import {
+  BurgerMenuProvider,
+  ContextProvider,
+} from "./_context/ContextProvider";
 import NavigationPanel from "./_components/NavigationPanel";
+import PopUp from "./_components/PopUp";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -30,15 +34,16 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <body className={`${poppins.className} antialiased`}>
         <SessionProvider session={session}>
-          <BurgerMenuProvider>
+          <ContextProvider>
             <Header />
             <QueryProvider>
+              <PopUp />
               <NavigationPanel />
               <Main>{children}</Main>
               <ReactQueryDevtools initialIsOpen={false} />
             </QueryProvider>
             <Toaster position="bottom-center" />
-          </BurgerMenuProvider>
+          </ContextProvider>
         </SessionProvider>
       </body>
     </html>

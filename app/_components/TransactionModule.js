@@ -33,6 +33,7 @@ function TransactionModule() {
       description,
       user,
       comment: comment.slice(0, 100),
+      proportion,
     };
 
     createTransaction(newTransaction, {
