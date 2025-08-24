@@ -1,13 +1,12 @@
 "use client";
-import Link from "next/link";
-import { useBurgerMenu } from "../_context/BurgerMenuProvider";
+import { useContextProvider } from "../_context/ContextProvider";
 import { usePathname } from "next/navigation";
 import { navigationConfig } from "../lib/config";
 import MenuLink from "./MenuLink";
 import { signOut } from "next-auth/react";
 
 function NavigationPanel() {
-  const { isOpen, closeBurgerMenu } = useBurgerMenu();
+  const { isOpen, closeBurgerMenu } = useContextProvider();
   const pathName = usePathname();
 
   if (isOpen)

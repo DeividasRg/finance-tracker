@@ -2,12 +2,12 @@
 import { signOut, useSession } from "next-auth/react";
 import Logo from "./Logo";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { useBurgerMenu } from "../_context/BurgerMenuProvider";
+import { useContextProvider } from "../_context/ContextProvider";
 import Navigation from "./Navigation";
 
 function Header() {
   const { status } = useSession();
-  const { isOpen, openBurgerMenu, closeBurgerMenu } = useBurgerMenu();
+  const { isOpen, openBurgerMenu, closeBurgerMenu } = useContextProvider();
 
   if (status !== "authenticated") {
     return (
