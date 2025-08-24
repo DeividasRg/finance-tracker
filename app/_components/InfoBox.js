@@ -26,6 +26,7 @@ function InfoBox() {
       amount: Math.abs(diff),
       description: "Repayment",
       user: diff > 0 ? "brigita" : "deividas",
+      proportion: "full",
     };
 
     createTransaction(newTransaction, {
