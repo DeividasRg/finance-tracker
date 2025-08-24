@@ -8,10 +8,16 @@ import { useTransactions } from "../hooks/useTransactions";
 import Spinner from "./Spinner";
 import formatString from "../_helpers/formatString";
 import { useState } from "react";
+import { FaExpandAlt } from "react-icons/fa";
+import { useContextProvider } from "../_context/ContextProvider";
+import { useAllTransactions } from "../hooks/useAllTransactions";
 
 function Logs() {
   const { transactions = [], isLoading } = useTransactions();
   const [description, setDescription] = useState("");
+  const { openModule, setData } = useContextProvider();
+  const { isLoading: isLoadingAll, transactions: transactionsAll = [] } =
+    useAllTransactions();
 
   const uniqueCategories = new Set(
     transactions.map((trans) => trans.description)
@@ -22,12 +28,29 @@ function Logs() {
       ? transactions.filter((trans) => trans.description === description)
       : transactions;
 
-  if (isLoading) return <Spinner />;
+  if (isLoading || isLoadingAll) return <Spinner />;
+
+  function openPopUp() {
+    const data = {
+      name: "allTransactions",
+      data: transactionsAll,
+    };
+    setData(data);
+    openModule();
+  }
 
   return (
     <>
       <div className="flex flex-col gap-1 sm:flex-row sm:gap-5 items-center sm:justify-between">
-        <HeaderStats>Transactions</HeaderStats>
+        <div className="flex items-center gap-3">
+          <HeaderStats>Transactions</HeaderStats>
+          <button
+            onClick={openPopUp}
+            className="bg-sky-100 p-1 rounded-full cursor-pointer hover:bg-sky-200"
+          >
+            <FaExpandAlt className="w-4 h-4" />
+          </button>
+        </div>
         <div className="mb-2 flex flex-wrap items-center gap-2 sm:gap-4 justify-center">
           {[...uniqueCategories].map((cat) => (
             <button
