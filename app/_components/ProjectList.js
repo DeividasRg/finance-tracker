@@ -8,6 +8,14 @@ function ProjectList({ sideMenu = false, projectId }) {
 
   if (isLoading) return <Spinner />;
 
+  if (projects.length === 0)
+    return (
+      <div className="mt-10 flex flex-col gap-2 text-center">
+        <p>No projects</p>
+        <p className="text-gray-500">Start by adding something 😊</p>
+      </div>
+    );
+
   const filteredProjects = sideMenu
     ? projects.filter((project) => !project.closed)
     : projects;
