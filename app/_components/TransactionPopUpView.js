@@ -27,7 +27,7 @@ function TransactionPopUpView({ data }) {
               <th className="p-1 border">Amount</th>
               <th className="p-1 border">Description</th>
               <th className="p-1 border">Comment</th>
-              <th className="p-1 border">Proportion</th>
+              <th className="p-1 border hidden sm:block">Proportion</th>
             </tr>
           </thead>
           <tbody>
@@ -43,7 +43,9 @@ function TransactionPopUpView({ data }) {
                 <td className="p-1 border">{formatCurrency(row.amount)}</td>
                 <td className="p-1 border">{row.description}</td>
                 <td className="p-1 border">{row.comment}</td>
-                <td className="p-1 border">{formatString(row.proportion)}</td>
+                <td className="p-1 border hidden sm:block">
+                  {formatString(row.proportion)}
+                </td>
               </tr>
             ))}
           </tbody>
