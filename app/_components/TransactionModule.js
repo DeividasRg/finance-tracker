@@ -82,7 +82,7 @@ function TransactionModule() {
           </select>
         </div>
         <div>
-          <p className="font-light">What did you buy?</p>
+          <p className="font-light">Category</p>
           <select
             defaultValue=""
             id="description"
