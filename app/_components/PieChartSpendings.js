@@ -14,7 +14,22 @@ import Spinner from "./Spinner";
 import { useEffect, useState } from "react";
 import { useTransactions } from "../hooks/useTransactions";
 
-const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042"];
+const COLORS = [
+  "#8884d8", // soft purple
+  "#82ca9d", // mint green
+  "#ffc658", // pastel yellow
+  "#ff8042", // orange
+  "#8dd1e1", // light blue
+  "#a4de6c", // lime green
+  "#d0ed57", // citrus yellow-green
+  "#ffc0cb", // soft pink
+  "#ffbb28", // amber
+  "#ff6666", // coral red
+  "#00c49f", // teal
+  "#0088fe", // bright blue
+  "#d888d8", // lavender pink
+  "#b0e57c", // fresh spring green
+];
 
 export default function PieChartSpendings() {
   const { transactions, isLoading } = useTransactions();
