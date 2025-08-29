@@ -1,13 +1,16 @@
 "use client";
 
 import BackButton from "@/app/_components/BackButton";
+import HeaderStats from "@/app/_components/HeaderStats";
 import HighLowPaymentOverview from "@/app/_components/HighLowPaymentOverview";
 import ProjectLogs from "@/app/_components/ProjectLogs";
 import ProjectMenuSide from "@/app/_components/ProjectMenuSide";
 import ProjectTransactionModule from "@/app/_components/ProjectTransactionModule";
 import Spinner from "@/app/_components/Spinner";
+import StatBox from "@/app/_components/StatBox";
 import StatsBox from "@/app/_components/StatsBox";
 import TitleComponent from "@/app/_components/TitleComponent";
+import UserTotal from "@/app/_components/UserTotal";
 import { getProject } from "@/app/_services/apiProjects";
 import { useCloseProject } from "@/app/hooks/useCloseProject";
 import { useProjectTransactions } from "@/app/hooks/useProjectTransactions";
