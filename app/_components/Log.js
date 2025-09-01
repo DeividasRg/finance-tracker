@@ -6,6 +6,7 @@ import formatString from "../_helpers/formatString";
 import formatDate from "../_helpers/formatDate";
 import { useDeleteTransaction } from "../hooks/useDeleteTransaction";
 import { useDeleteProjectTransaction } from "../hooks/useDeleteProjectTransaction";
+import formatCurrency from "../_helpers/formatCurrency";
 
 function Log({ transaction, isProject = false }) {
   const { amount, comment, description, created_at, user, id } = transaction;
@@ -25,7 +26,7 @@ function Log({ transaction, isProject = false }) {
         <div className="flex items-center gap-4">
           <span className="text-xs sm:text-base">
             {formatString(user)} paid
-            <span className="font-bold"> {Math.abs(amount)} </span>€
+            <span className="font-bold"> {formatCurrency(amount)} </span>
           </span>
           <span className="text-sm text-gray-500">
             {formatString(description)}
@@ -39,7 +40,7 @@ function Log({ transaction, isProject = false }) {
           />
           <span className="text-xs sm:text-base">
             {formatString(user)} {amount > 0 ? "received" : "paid"}{" "}
-            <span className="font-bold">{Math.abs(amount)} </span>€
+            <span className="font-bold">{formatCurrency(amount)} </span>
           </span>
         </div>
       )}

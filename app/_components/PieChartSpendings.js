@@ -13,6 +13,7 @@ import formatString from "../_helpers/formatString";
 import Spinner from "./Spinner";
 import { useEffect, useState } from "react";
 import { useTransactions } from "../hooks/useTransactions";
+import formatCurrency from "../_helpers/formatCurrency";
 
 const COLORS = [
   "#8884d8", // soft purple
@@ -66,7 +67,7 @@ export default function PieChartSpendings() {
   ).map((sum) => {
     return {
       name: formatString(sum.description),
-      value: Math.abs(sum.sum) * 2,
+      value: Math.abs(sum.sum) * 2, //needs refactoring
     };
   });
 
@@ -95,7 +96,7 @@ export default function PieChartSpendings() {
                 />
               ))}
             </Pie>
-            <Tooltip formatter={(value) => `${value}€`} />
+            <Tooltip formatter={(value) => `${formatCurrency(value)}`} />
 
             <Legend
               verticalAlign="middle"

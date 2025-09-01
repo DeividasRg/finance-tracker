@@ -3,6 +3,7 @@
 import { HiOutlineCash } from "react-icons/hi";
 import Spinner from "./Spinner";
 import { useTransactions } from "../hooks/useTransactions";
+import formatCurrency from "../_helpers/formatCurrency";
 
 function UserTotal({ user }) {
   const { transactions, isLoading } = useTransactions();
@@ -18,9 +19,7 @@ function UserTotal({ user }) {
       <div className="bg-green-200 p-3 rounded-full">
         <HiOutlineCash className="w-[2.5rem] h-[2.5rem]" />
       </div>
-      <p className="text-3xl font-bold">
-        {Math.abs(data).toFixed(2)} <span>€</span>
-      </p>
+      <p className="text-3xl font-bold">{formatCurrency(data)}</p>
     </div>
   );
 }
