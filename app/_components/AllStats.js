@@ -1,3 +1,5 @@
+import formatCurrency from "../_helpers/formatCurrency";
+
 function AllStats({ transactions }) {
   const totalSpent = Math.round(
     Math.abs(
@@ -15,7 +17,9 @@ function AllStats({ transactions }) {
       </p>
       <p>
         All time spent -{" "}
-        <span className="text-gray-800 font-bold">{totalSpent} €</span>
+        <span className="text-gray-800 font-bold">
+          {formatCurrency(totalSpent)}
+        </span>
       </p>
     </div>
   );

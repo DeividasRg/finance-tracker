@@ -4,6 +4,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useCreateTransaction } from "../hooks/useCreateTransaction";
 import Spinner from "./Spinner";
 import { useAllTransactions } from "../hooks/useAllTransactions";
+import formatCurrency from "../_helpers/formatCurrency";
 
 function InfoBox() {
   const { isCreating, createTransaction } = useCreateTransaction();
@@ -56,12 +57,13 @@ function InfoBox() {
           <span>Nobody owes anything 😊</span>
         ) : diff > 0 ? (
           <span>
-            Deividas <span className="text-red-700">owes</span> Brigita {diff} €
+            Deividas <span className="text-red-700">owes</span> Brigita{" "}
+            {formatCurrency(diff)}
           </span>
         ) : (
           <span>
             Brigita <span className="text-red-700">owes</span> Deividas{" "}
-            {Math.abs(diff)} €
+            {formatCurrency(diff)}
           </span>
         )}
       </div>

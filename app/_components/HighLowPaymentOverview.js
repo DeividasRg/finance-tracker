@@ -62,13 +62,13 @@ function HighLowPaymentOverview({ id, projectTransactions }) {
                 <div className="bg-green-200 rounded-full p-1">
                   <CiMoneyBill className="w-5 h-5" />
                 </div>
-                <p>Deividas ${deividas}€ </p>
+                <p>Deividas ${formatCurrency(deividas)} </p>
               </div>
               <div className="flex items-center gap-2">
                 <div className="bg-green-200 rounded-full p-1">
                   <CiMoneyBill className="w-5 h-5" />
                 </div>
-                <p>Brigita ${brigita} €</p>
+                <p>Brigita ${formatCurrency(brigita)}</p>
               </div>
             </div>
           </>

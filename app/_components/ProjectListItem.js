@@ -3,6 +3,7 @@ import formatDateV2 from "../_helpers/formatDateV2";
 import { use } from "react";
 import { HiOutlineTrash } from "react-icons/hi";
 import { useDeleteProject } from "../hooks/useDeleteProject";
+import formatCurrency from "../_helpers/formatCurrency";
 
 function ProjectListItem({ project, sideMenu = false, activeId }) {
   const { name, created_at: date, total_amount, closed, id } = project;
@@ -36,7 +37,7 @@ function ProjectListItem({ project, sideMenu = false, activeId }) {
       >
         <p>{name}</p>
         <p className="text-xs">{formatDateV2(date)}</p>
-        <p>{total_amount} €</p>
+        <p>{formatCurrency(total_amount)}</p>
       </button>
 
       {!sideMenu && closed && (
